@@ -757,9 +757,17 @@ test("how to fight a rare: Forever first, then the classic data", function()
   end
   eq(header, "Classic data (may differ in Forever)")
   eq(spell, 8256, "Lethal Toxin from the classic spell list")
-  -- Humar: Forever already says how long his respawn is, so the classic timer stays out.
+  -- Humar: what players saw in Classic (8 to 12 hours) over the server's 15 hours, in the classic part.
   local _, _, _, humar = ns.Database.TacticsOf(5828)
-  for _, e in ipairs(humar) do assert(not (e.text and e.text:find("Respawns")), "no classic respawn for Humar") end
+  local respawns, classicSeen = {}, false
+  for _, e in ipairs(humar) do
+    if e.header then classicSeen = true end
+    if e.text and e.text:find("Respawns") then respawns[#respawns + 1] = e.text; eq(classicSeen, true, "a classic figure") end
+  end
+  eq(#respawns, 1); eq(respawns[1], "Respawns after 8 to 12 hours.")
+  -- Nightveiled Rotheap: Forever's own figure, above the classic part.
+  local _, _, _, rotheap = ns.Database.TacticsOf(270589)
+  eq(rotheap[2].text, "Respawns after 5 to 30 minutes.")
   -- Brack, classic only: flees at 15%, classic rank, plain classic header.
   local brank, bforever, btip, brack = ns.Database.TacticsOf(520)
   eq(brank, "Rare"); eq(bforever, false); eq(btip, nil)
@@ -803,6 +811,70 @@ test("opening a rare clears a filter that would hide it, the undiscovered one to
   local found = false
   for _, n in ipairs(ns.Database.Rebuild()) do if n == 5934 then found = true end end
   eq(found, true)
+end)
+
+test("respawn timer after a death, on that layer", function()
+  ns.Sightings.Clear()
+  wipe(ns.db.kills)
+  local t0 = GetServerTime()
+  ns.Sightings.AddLocal(report(5934, { state = "D", time = t0 }))
+  -- The corpse reported again a few minutes later is the same death.
+  ns.Sightings.AddLocal(report(5934, { state = "D", time = t0 + 180 }))
+  eq(ns.Sightings.Kills(5934)[1].time, t0)
+  local text, short = ns.Database.RespawnStatus(5934, t0 + 3600, LAYER)
+  eq(short, "back in 4h-7h", "Forever: 5 to 8 hours")
+  assert(text:find("^Killed 1h ago"), text)
+  text, short = ns.Database.RespawnStatus(5934, t0 + 6 * 3600, LAYER)
+  eq(short, "may be back")
+  _, short = ns.Database.RespawnStatus(5934, t0 + 9 * 3600, LAYER)
+  eq(short, "should be back")
+  eq(ns.Database.RespawnStatus(5934, t0 + 17 * 3600, LAYER), nil, "long past: nothing to say")
+  -- A rare without a known respawn time still says when it died.
+  ns.Sightings.AddLocal(report(255887, { state = "D", time = t0 }))
+  text = ns.Database.RespawnStatus(255887, t0 + 60, LAYER)
+  assert(text:find("respawn time unknown"), text)
+  eq(ns.Database.RespawnStatus(255887, t0 + 3 * 3600, LAYER), nil, "an unknown respawn is not news for long")
+  -- A death two days old is forgotten.
+  ns.Sightings.PruneKills(ns.db, t0 + 49 * 3600)
+  eq(#ns.Sightings.Kills(5934), 0)
+  ns.Sightings.Clear()
+end)
+
+test("respawn timer: seen up again, killed again, and only trusted deaths", function()
+  ns.Sightings.Clear()
+  wipe(ns.db.kills); wipe(ns.db.alive)
+  local t0 = GetServerTime()
+  -- Seen up after the death: the timer is over.
+  ns.Sightings.AddLocal(report(5934, { state = "D", time = t0 }))
+  ns.Sightings.AddLocal(report(5934, { state = "A", time = t0 + 3 * 3600 }))
+  eq(ns.Database.RespawnStatus(5934, t0 + 3 * 3600 + 60, LAYER), nil, "up again: no timer")
+  -- Killed again soon after (Rotheap is back within 5 to 30 minutes): a new death, a new timer.
+  ns.Sightings.Clear()
+  ns.Sightings.AddLocal(report(270589, { state = "D", time = t0 }))
+  ns.Sightings.AddLocal(report(270589, { state = "A", time = t0 + 360 }))
+  ns.Sightings.AddLocal(report(270589, { state = "D", time = t0 + 720 }))
+  eq(ns.Sightings.Kills(270589)[1].time, t0 + 720)
+  local _, short = ns.Database.RespawnStatus(270589, t0 + 780, LAYER)
+  eq(short, "back in 4m-29m")
+  -- One report from another player does not start a timer, even on a rare others confirmed up.
+  ns.Sightings.Clear()
+  wipe(ns.db.kills)
+  ns.Sightings.AddRemote(report(5828, { state = "D", time = t0 }), "Lone Liar", t0)
+  eq(#ns.Sightings.Kills(5828), 0)
+  ns.Sightings.Clear()
+  ns.Sightings.AddRemote(report(5828, { time = t0 }), "Alice", t0)
+  ns.Sightings.AddRemote(report(5828, { time = t0 }), "Bob", t0)
+  ns.Sightings.AddRemote(report(5828, { state = "D", time = t0 + 60 }), "Liar", t0 + 60)
+  eq(#ns.Sightings.Kills(5828), 0, "one player says dead")
+  ns.Sightings.AddRemote(report(5828, { state = "D", time = t0 + 70 }), "Carol", t0 + 70)
+  eq(#ns.Sightings.Kills(5828), 1, "a second one agrees")
+  -- A rare whose respawn takes days keeps its death long enough.
+  ns.Sightings.RecordKill(1850, LAYER, t0)
+  ns.Sightings.PruneKills(ns.db, t0 + 50 * 3600)
+  local _, max = ns.Database.RespawnOf(1850)
+  eq(#ns.Sightings.Kills(1850), (max and 2 * max > 50 * 3600) and 1 or 0)
+  ns.Sightings.Clear()
+  wipe(ns.db.kills); wipe(ns.db.alive)
 end)
 
 print = function(...) io.write(table.concat({ ... }, " "), "\n") end

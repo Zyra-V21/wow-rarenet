@@ -118,6 +118,9 @@ ns.On("ADDON_LOADED", function(name)
   if s.minimapHide == nil then s.minimapHide = false end
   if s.minimapAngle == nil then s.minimapAngle = 225 end
   db.ignored = db.ignored or {}
+  db.kills = db.kills or {}
+  db.alive = db.alive or {}
+  ns.Sightings.PruneKills(db, ns.Now())
   db.diag = ns.diag
   ns.db = db
   for _, fn in ipairs(ns.onLoad) do fn(db) end

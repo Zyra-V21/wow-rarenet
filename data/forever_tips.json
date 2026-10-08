@@ -1,12 +1,24 @@
 {
-  "_about": "How to find and fight Forever rares, written by RareNet in its own words from the facts ForeverChanges (foreverchanges.pro) lists for Forever, used with their permission. Shipped by tools/gen_tactics.py ahead of the classic data.",
+  "_about": "How to find and fight Forever rares, written by RareNet in its own words from the facts ForeverChanges (foreverchanges.pro) lists for Forever, used with their permission. Shipped by tools/gen_tactics.py ahead of the classic data. An entry is a tip, or { tip, respawn = [min, max] seconds } when Forever says how long it takes to come back, or respawnClassic when the figure it gives is the one players saw in Classic.",
   "5797": "Four elite scouts (level 24 and 25) ride the southern Barrens road together, from Bael Modan north past Camp Taurajo and back. They fight as one: bring a group.",
-  "5828": "Rests with his pride of lions under the great tree north of Ratchet. His respawn is long (eight to twelve hours in Classic), so take him when he is up.",
+  "5828": {
+    "tip": "Rests with his pride of lions under the great tree north of Ratchet. His respawn is long (eight to twelve hours in Classic), so take him when he is up.",
+    "respawnClassic": [
+      28800,
+      43200
+    ]
+  },
   "5831": "Roams the plateau north of Ratchet, the same one as Humar the Pridelord.",
   "5842": "Roams the northern Barrens, around 61, 14.",
   "5931": "Walks the Venture Co. camp at Windshear Crag, in the east of Stonetalon Mountains, around 66, 50.",
   "5932": "Patrols Windshear Crag in the east of Stonetalon Mountains, around 62, 54, fighting with the very dagger it drops.",
-  "5934": "A heavy hitter with a poison. Solo kills were a close call even for players a couple of levels above 30 in Classic: bring a second player. It has a single spawn point and took five to eight hours to come back in Classic. Hunters cannot tame it.",
+  "5934": {
+    "tip": "A heavy hitter with a poison. Solo kills were a close call even for players a couple of levels above 30 in Classic: bring a second player. It has a single spawn point and took five to eight hours to come back in Classic. Hunters cannot tame it.",
+    "respawnClassic": [
+      18000,
+      28800
+    ]
+  },
   "214456": "Can turn up in three places in the Redridge Mountains: Render's Valley (74, 82), Stonewatch Keep (63, 43) and Render's Camp (36, 9).",
   "248299": "Not the grey Matriarch Bristlefur: this one is a black bear, with more health than Hogger (over 800). Find it south of Ridgepoint Tower, where the tower guards lend a hand, or on the calmer hills north of Stone Cairn Lake.",
   "250936": "One of its spots is at 56.3, 31.7, on the cliff edge to the left of the central structure. Its loot so far: an ordinary green.",
@@ -14,10 +26,28 @@
   "259388": "An owlbear of the Shadowgale Forest with a 1.6 attack speed.",
   "259394": "Loops around the giant tree beyond the Hippogryph Protectors in Thendal Grove. Hunters cannot tame it.",
   "270294": "An elemental with about 2,400 health whose frostbolts hit for over 100. It drops the Clouded Water Globe, which starts a quest. A strong player can solo him around level 20, but a group is safer.",
-  "270589": "Night only (server time, usually after 9 pm): it rises out of the sea on the west coast and follows the main river up to the dam, where it disappears. Up to three can roam at once, each back 5 to 30 minutes after a kill. Slows work on it, so it can be kited.",
+  "270589": {
+    "tip": "Night only (server time, usually after 9 pm): it rises out of the sea on the west coast and follows the main river up to the dam, where it disappears. Up to three can roam at once, each back 5 to 30 minutes after a kill. Slows work on it, so it can be kited.",
+    "respawn": [
+      300,
+      1800
+    ]
+  },
   "274300": "A blue ghost wolf of the Whispering Forest that uses Furious Howl. Its respawn takes hours.",
   "276089": "Wanders the bottom of Brightwater Lake. So far it dropped only linen cloth and copper.",
-  "276101": "Look by the road opposite the leatherworking trainer. Back one to two hours after a kill.",
-  "276111": "Seen at four spots behind the big trees on the hills by the tunnel to the Wetlands. Respawns in about 30 minutes. No loot of its own so far.",
+  "276101": {
+    "tip": "Look by the road opposite the leatherworking trainer. Back one to two hours after a kill.",
+    "respawn": [
+      3600,
+      7200
+    ]
+  },
+  "276111": {
+    "tip": "Seen at four spots behind the big trees on the hills by the tunnel to the Wetlands. Respawns in about 30 minutes. No loot of its own so far.",
+    "respawn": [
+      1800,
+      1800
+    ]
+  },
   "276198": "Attack speed 1.3 (seen in the beta)."
 }

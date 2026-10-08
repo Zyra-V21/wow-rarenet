@@ -385,6 +385,13 @@ function RareNetPinMixin:OnMouseEnter()
   else
     tip:AddLine("Known spawn point", 0.7, 0.7, 0.7)
   end
+  -- Respawn timer after a death: on that layer for a live pin, else the
+  -- player's layer (or the newest death).
+  local live = d.kind == "live" and d.entry or nil
+  if not live or live.state == "D" then
+    local respawn = ns.Database.RespawnStatus(d.npc, ns.Now(), live and live.layer or nil)
+    if respawn then tip:AddLine(respawn, 1, 0.47, 0.27) end
+  end
   local pin = self
   local loot = ns.Database.TopLoot(d.npc, 3, function()
     -- Item names arrive later: redraw while the tooltip is still ours.

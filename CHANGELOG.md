@@ -1,5 +1,10 @@
 # RareNet changelog
 
+## 0.8.2 (beta)
+- Respawn timers: when a rare dies, RareNet remembers it for that layer and tells you when it should be back: "Killed 1h ago on your layer: back in 4h-7h", then "may be back now" while its respawn window is open. In the rare database, on the map tooltips and in the live list ("dead, back in 4h-7h"). Seeing it up again ends the timer.
+- Forever first: the respawn time comes from Forever when it is known (Nightveiled Rotheap 5 to 30 minutes, Nightscreech 1 to 2 hours, Ghostfang about 30 minutes), else from the classic data, using what players saw where we know it (Humar 8 to 12 hours, Heartrazor 5 to 8 hours).
+- Only your own sightings, or two players reporting the same death, start a timer: a single wrong report cannot. Deaths are kept for two days (longer for rares that take days to come back), so the timer survives a logout or a /reload.
+
 ## 0.8.1 (beta)
 - Tameable rares follow Forever: Elmpaw, the black bear of Elwynn, now shows as tameable, and whenever Forever says hunters cannot tame a rare, that wins over the classic data.
 - Opening a rare from the map or the live list always shows it in the rare database, even with the "Undiscovered" filter on.

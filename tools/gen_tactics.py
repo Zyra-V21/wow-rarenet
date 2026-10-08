@@ -2,7 +2,8 @@
 """Generate RareNet/Tactics.lua: how to find and fight each rare.
 
 Forever comes first: the rank from wow-raredb (ForeverChanges data, used with
-their permission) and the tips RareNet wrote from it (data/forever_tips.json).
+their permission) and the tips RareNet wrote from it (data/forever_tips.json),
+with the respawn time when Forever gives one.
 Then what the classic vmangos database knows, shown as classic data: the
 spells the rare casts (its spell list and its scripted casts, some only below
 a share of its health), when it flees or calls for help, what it summons, and
@@ -111,7 +112,7 @@ def main():
         "-- their permission, and RareNet's tips), then classic vmangos data. Spells are IDs only:",
         "-- the client names and describes them.",
         "-- npcID = { rank, rankFromForever, tip, { spellID, belowHealth%, ... }, flee%, help%,",
-        "--           { summoned, ... }, respawnMin, respawnMax }",
+        "--           { summoned, ... }, respawnMin, respawnMax, respawnFromForever }",
         "local _, ns = ...",
         "ns.Tactics = {",
     ]
@@ -121,16 +122,24 @@ def main():
         rank, spells, flee, help_at, summons, respawn = c if c else (None, [], 0, 0, [], (None, None))
         from_forever = npc in franks
         rank = franks.get(npc) or rank
-        tip = tips.get(npc)
-        if tip and re.search(r"respawn|between spawns|to come back|after a kill", tip, re.I):
-            respawn = (None, None)  # Forever's word on the respawn wins over the classic timer
+        entry = tips.get(npc)
+        tip = entry.get("tip") if isinstance(entry, dict) else entry
+        respawn_forever = isinstance(entry, dict) and entry.get("respawn")
+        respawn_players = isinstance(entry, dict) and entry.get("respawnClassic")
+        if respawn_forever:
+            respawn = tuple(respawn_forever)  # Forever's respawn wins over the classic timer
+        elif respawn_players:
+            respawn = tuple(respawn_players)  # what players saw in Classic, over the server's figure
+        elif tip and re.search(r"respawn|between spawns|to come back|after a kill", tip, re.I):
+            respawn = (None, None)  # Forever talks about it without a figure: no classic one either
         if not (rank or tip or spells or flee or help_at or summons):
             continue
         flat = ", ".join("%d, %d" % s for s in spells)
         adds = ", ".join(lua_string(s) for s in summons)
-        lines.append("  [%d] = { %s, %s, %s, { %s }, %d, %d, { %s }, %d, %d }," % (
+        lines.append("  [%d] = { %s, %s, %s, { %s }, %d, %d, { %s }, %d, %d, %s }," % (
             npc, lua_string(rank) if rank else "nil", "true" if from_forever else "false",
-            lua_string(tip) if tip else "nil", flat, flee, help_at, adds, respawn[0] or 0, respawn[1] or 0))
+            lua_string(tip) if tip else "nil", flat, flee, help_at, adds, respawn[0] or 0, respawn[1] or 0,
+            "true" if respawn_forever else "false"))
         count += 1
     lines += ["}", "return ns.Tactics"]
     open(OUT, "w", encoding="utf-8").write("\n".join(lines) + "\n")

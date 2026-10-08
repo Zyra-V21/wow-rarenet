@@ -29,6 +29,13 @@ local function layerText(e)
   return color .. ns.Layer.Label(e.layer) .. "|r"
 end
 
+-- ", back in 4h-7.5h" after a dead rare, when its respawn time is known.
+local function deadNote(e, now)
+  local _, short = ns.Database.RespawnStatus(e.npc, now, e.layer)
+  if not short or short == "dead" then return "" end
+  return "|cffff7744, " .. short .. "|r"
+end
+
 local function setWaypoint(e)
   if not (e and e.uiMap and e.uiMap > 0 and C_Map.CanSetUserWaypointOnMap(e.uiMap)) then return end
   C_Map.SetUserWaypoint(UiMapPoint.CreateFromCoordinates(e.uiMap, e.x, e.y))
@@ -117,7 +124,7 @@ local function refresh(now)
         layerText(e), e.cached and "|cff888888~|r" or (e.doubtful and "|cffff4444??|r" or (e.confirmed and "" or "|cffaaaaaa?|r")), e.name,
         e.level and (" (" .. e.level .. ")") or "",
         zoneName(e.uiMap), (e.x or 0) * 100, (e.y or 0) * 100, age(now - e.time),
-        e.state == "D" and "|cffff4444dead|r" or "|cff33ff33up|r", e.tame and "  |cffffcc00tame|r" or ""))
+        e.state == "D" and ("|cffff4444dead|r" .. deadNote(e, now)) or "|cff33ff33up|r", e.tame and "  |cffffcc00tame|r" or ""))
       b:Show()
     else
       b:Hide()

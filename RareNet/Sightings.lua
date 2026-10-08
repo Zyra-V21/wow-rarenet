@@ -16,6 +16,8 @@ local DEAD_TTL = 10 * 60
 local UNCONFIRMED_TTL = 6.5 * 60  -- above the re-announce interval, so a lone witness keeps it alive
 local CACHE_VALID = 10 * 60     -- a logout cache older than this is dropped
 local FUTURE_SKEW = 120
+local KILL_MEMORY = 48 * 3600   -- deaths are remembered at least this long, for respawn timers
+local DEATH_SPAN = 20 * 60      -- death reports this close together are the same death
 
 local entries = {}              -- id -> entry
 local listeners = {}
@@ -71,6 +73,8 @@ local function merge(report, sender, kind)
   local changed = isNew or e.state ~= report.state or e.cached
   local wasDead = e.state == "D"
   if report.time >= e.time then
+    -- A new state (dead after up, up after dead) needs its own witnesses.
+    if report.state ~= e.state then e.stateBy = {} end
     -- A newer positive report outdates every negative sent before it.
     for who, t in pairs(e.negatives) do
       if t < report.time then e.negatives[who] = nil end
@@ -92,6 +96,17 @@ local function merge(report, sender, kind)
   refreshTrust(e)
   e.doubtful = next(e.negatives) ~= nil
   if e.confirmed and not wasConfirmed then changed = true end
+  -- A death starts its respawn timer on that layer (kept in the saved
+  -- variables), and seeing it up again ends it. Only trusted news counts:
+  -- this client saw that state, or two players reported it.
+  if report.state == e.state then
+    e.stateBy = e.stateBy or {}
+    e.stateBy[kind == "local" and "me" or (sender or "?")] = true
+    if e.stateBy.me or count(e.stateBy) >= 2 then
+      if e.state == "D" then Sightings.RecordKill(e.npc, e.layer, e.time)
+      else Sightings.RecordUp(e.npc, e.layer, e.time) end
+    end
+  end
   -- Up again after a recorded death: a respawn, news like a new sighting.
   e.respawned = wasDead and e.state == "A"
   if changed then notify(e, isNew) end
@@ -138,6 +153,65 @@ function Sightings.NotSeen(id, sender, t)
   e.doubtful = true
   notify(e, false)
   return "doubtful"
+end
+
+-- Deaths per rare and layer: db.kills[npc@layer] = time of the death report.
+local function kills() return ns.db and ns.db.kills or {} end
+
+-- Respawn time of a rare from RareNet/Tactics.lua (seconds), or nil.
+local function respawnOf(npc)
+  local t = ns.Tactics and ns.Tactics[npc]
+  if t and (t[8] or 0) > 0 then return t[8], math.max(t[8], t[9] or 0) end
+end
+
+-- A corpse is reported again for minutes after the kill: reports that close
+-- together are one death, timed by the earliest (never closer than the
+-- rare's own respawn time). Once it was seen up again, a death is a new one.
+function Sightings.RecordKill(npc, layer, t)
+  if not (ns.db and ns.db.kills) then return end
+  local id = Sightings.Id(npc, layer)
+  local old, up = ns.db.kills[id], ns.db.alive and ns.db.alive[id]
+  local span = math.min(DEATH_SPAN, respawnOf(npc) or DEATH_SPAN)
+  if not old or t > old + span or (up and up > old and t > up) then
+    ns.db.kills[id] = t
+  elseif t < old and old - t < span then
+    ns.db.kills[id] = t
+  end
+end
+
+-- The rare was seen up: a death before that is over.
+function Sightings.RecordUp(npc, layer, t)
+  if not (ns.db and ns.db.alive) then return end
+  local id = Sightings.Id(npc, layer)
+  if ns.db.kills[id] and (ns.db.alive[id] or 0) < t then ns.db.alive[id] = t end
+end
+
+-- Last deaths of a rare: { { layer, time }, ... } newest first, leaving out
+-- those it has been seen up after.
+function Sightings.Kills(npc)
+  local out = {}
+  local prefix = npc .. "@"
+  local alive = ns.db and ns.db.alive or {}
+  for id, t in pairs(kills()) do
+    if id:sub(1, #prefix) == prefix and not ((alive[id] or 0) > t) then
+      out[#out + 1] = { layer = id:sub(#prefix + 1), time = t }
+    end
+  end
+  table.sort(out, function(a, b) return a.time > b.time end)
+  return out
+end
+
+-- Forget deaths once their timer is long over: two days, or twice the
+-- rare's longest respawn when that is more.
+function Sightings.PruneKills(db, now)
+  for id, t in pairs(db.kills or {}) do
+    local npc = tonumber(id:match("^(%d+)@"))
+    local _, max = respawnOf(npc or 0)
+    if now - t > math.max(KILL_MEMORY, 2 * (max or 0)) then db.kills[id] = nil end
+  end
+  for id in pairs(db.alive or {}) do
+    if not (db.kills and db.kills[id]) then db.alive[id] = nil end
+  end
 end
 
 function Sightings.Get(id) return entries[id] end

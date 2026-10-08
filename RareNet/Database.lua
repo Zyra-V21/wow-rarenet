@@ -206,12 +206,24 @@ Database.HoursText = hoursText
 function Database.TacticsOf(npc)
   local t = ns.Tactics and ns.Tactics[npc]
   if not t then return nil, false, nil, {} end
-  local rank, fromForever, tip, spells, flee, help, adds, respawnMin, respawnMax =
-    t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8], t[9]
+  local rank, fromForever, tip, spells, flee, help, adds, respawnMin, respawnMax, respawnForever =
+    t[1], t[2], t[3], t[4], t[5], t[6], t[7], t[8], t[9], t[10]
   local entries = {}
   if rank and rank:find("lite") then
     entries[#entries + 1] = { text = "Elite: far tougher than a normal mob of its level. Come with others unless you outlevel it." }
   end
+  local function respawnLine()
+    local span = hoursText(respawnMin)
+    if respawnMax > respawnMin then
+      local a, b = hoursText(respawnMin), hoursText(respawnMax)
+      -- "8 to 12 hours", "5 to 30 minutes", but "45 minutes to 2 hours"
+      local ua, ub = a:match(" (%a+)$"), b:match(" (%a+)$")
+      if ua and ub and (ua:gsub("s$", "")) == (ub:gsub("s$", "")) then a = (a:gsub(" %a+$", "")) end
+      span = a .. " to " .. b
+    end
+    return { text = "Respawns after " .. span .. "." }
+  end
+  if respawnForever and respawnMin > 0 then entries[#entries + 1] = respawnLine() end
   local classic = {}
   for i = 1, #spells, 2 do
     local id, below = spells[i], spells[i + 1]
@@ -222,15 +234,64 @@ function Database.TacticsOf(npc)
   if flee > 0 then classic[#classic + 1] = { text = "Flees at " .. flee .. "% health: finish it fast or slow it." } end
   if help > 0 then classic[#classic + 1] = { text = "Calls for help at " .. help .. "% health: pull it away from others." } end
   for _, add in ipairs(adds) do classic[#classic + 1] = { text = "Summons " .. add .. "." } end
-  if respawnMin > 0 then
-    local span = respawnMax > respawnMin and (hoursText(respawnMin) .. " to " .. hoursText(respawnMax)) or hoursText(respawnMin)
-    classic[#classic + 1] = { text = "Respawns after " .. span .. "." }
-  end
+  if respawnMin > 0 and not respawnForever then classic[#classic + 1] = respawnLine() end
   if #classic > 0 then
     entries[#entries + 1] = { header = (tip or fromForever) and "Classic data (may differ in Forever)" or "Classic data", grey = true }
     for _, e in ipairs(classic) do entries[#entries + 1] = e end
   end
   return rank, fromForever, tip, entries
+end
+
+-- Respawn time of a rare in seconds (min, max) and whether Forever says so,
+-- or nil when nothing is known.
+function Database.RespawnOf(npc)
+  local t = ns.Tactics and ns.Tactics[npc]
+  if not t or (t[8] or 0) <= 0 then return nil end
+  return t[8], math.max(t[8], t[9] or 0), t[10] == true
+end
+
+local UNKNOWN_RESPAWN_SHOWN = 2 * 3600   -- a death with no known respawn time is news this long
+
+local function shortHours(secs)
+  if secs < 3600 then return math.max(1, math.floor(secs / 60 + 0.5)) .. "m" end
+  local h = math.floor(secs / 1800 + 0.5) / 2
+  return (h % 1 == 0 and string.format("%d", h) or string.format("%.1f", h)) .. "h"
+end
+
+-- Where a rare's respawn stands after its last known death: on the player's
+-- layer if there is one, else the newest. Returns a sentence and a short form
+-- for lists ("back in 4-7.5h"), or nil.
+function Database.RespawnStatus(npc, now, layer)
+  local kill
+  for _, k in ipairs(ns.Sightings.Kills(npc)) do
+    if layer then
+      if k.layer == layer then kill = k break end
+    elseif ns.Layer.IsMine(k.layer) then
+      kill = k break
+    elseif not kill then
+      kill = k
+    end
+  end
+  if not kill then return nil end
+  local mine = ns.Layer.IsMine(kill.layer)
+  local where = mine and "your layer" or (ns.Layer.Label(kill.layer) .. (mine == false and " (not yours)" or ""))
+  local ago = math.max(0, now - kill.time)
+  local head = string.format("Killed %s ago on %s", shortHours(ago), where)
+  local min, max = Database.RespawnOf(npc)
+  if not min then
+    if ago > UNKNOWN_RESPAWN_SHOWN then return nil end
+    return head .. " (respawn time unknown)", "dead"
+  end
+  if ago < min then
+    local a, b = min - ago, max - ago
+    local span = b - a >= 60 and (shortHours(a) .. "-" .. shortHours(b)) or shortHours(a)
+    return head .. ": back in " .. span, "back in " .. span
+  elseif ago < max then
+    return head .. ": may be back now (window closes in " .. shortHours(max - ago) .. ")", "may be back"
+  elseif ago < max * 2 then
+    return head .. ": should be back", "should be back"
+  end
+  return nil
 end
 
 local function cancelLoads()
@@ -421,10 +482,17 @@ local function showDetail()
     d.zone:SetText(string.format("%s  -  %d spawn point%s", zoneName(detailMap), spawns, spawns == 1 and "" or "s"))
   end
   local live = liveOf(selected)
-  if live then
+  local respawn = Database.RespawnStatus(selected, ns.Now(), live and live.state == "D" and live.layer or nil)
+  if live and live.state == "A" then
     local mine = ns.Layer.IsMine(live.layer)
-    d.live:SetText(string.format("%s %s, %ds ago", live.state == "D" and "|cffff4444Dead|r" or "|cff33ff33Up|r",
-      mine and "on your layer" or ("on " .. ns.Layer.Label(live.layer)), ns.Now() - live.time))
+    d.live:SetText(string.format("|cff33ff33Up|r %s, %ds ago", mine and "on your layer" or ("on " .. ns.Layer.Label(live.layer)),
+      ns.Now() - live.time))
+  elseif respawn then
+    d.live:SetText("|cffff7744" .. respawn .. "|r")
+  elseif live then
+    local mine = ns.Layer.IsMine(live.layer)
+    d.live:SetText(string.format("|cffff4444Dead|r %s, %ds ago", mine and "on your layer" or ("on " .. ns.Layer.Label(live.layer)),
+      ns.Now() - live.time))
   else
     d.live:SetText("|cff888888No live sighting|r")
   end
