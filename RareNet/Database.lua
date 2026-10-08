@@ -901,7 +901,8 @@ function Database.Open(npc)
     local visible = false
     for _, n in ipairs(list) do if n == npc then visible = true end end
     if not visible then
-      filter.text, filter.tame, filter.new, filter.loot, filter.live, filter.level = "", false, false, false, false, false
+      filter.text, filter.tame, filter.new, filter.loot, filter.live, filter.level, filter.undiscovered =
+        "", false, false, false, false, false, false
       local _, has = mapsOf(npc)
       if filter.zone and not has[filter.zone] then filter.zone = nil end
       if frame.search and frame.search.SetText then frame.search:SetText("") end

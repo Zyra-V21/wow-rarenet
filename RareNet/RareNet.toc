@@ -2,7 +2,7 @@
 ## Title: RareNet
 ## Notes: Shares rare mob sightings between players, tagged by layer. /rarenet
 ## Author: Zyra
-## Version: 0.8.0
+## Version: 0.8.1
 ## IconTexture: Interface\Icons\INV_Misc_Spyglass_03
 ## X-License: GPL-3.0
 ## SavedVariables: RareNetDB

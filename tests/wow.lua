@@ -6,6 +6,18 @@ local SECRET = setmetatable({}, { __tostring = function() return "<secret>" end 
 M.SECRET = SECRET
 function issecretvalue(v) return v == SECRET end
 
+-- A seeded random generator: every run takes the same random waits, so a
+-- failure can be reproduced (fengari's own is unseeded).
+local seed = tonumber(os.getenv and os.getenv("RARENET_SEED") or nil) or 20261008
+function math.randomseed(s) seed = s end
+function math.random(m, n)
+  seed = (seed * 1103515245 + 12345) % 2147483648
+  local r = seed / 2147483648
+  if not m then return r end
+  if not n then m, n = 1, m end
+  return m + math.floor(r * (n - m + 1))
+end
+
 function GetTime() return M.clock end
 function GetServerTime() return math.floor(M.server) end
 function wipe(t) for k in pairs(t) do t[k] = nil end return t end

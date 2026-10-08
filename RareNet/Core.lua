@@ -4,7 +4,9 @@ local ADDON, ns = ...
 ns.PREFIX = "RareNet"
 
 -- Forever rares (spawns and loot from ForeverChanges, used with permission)
--- join the seed list: new rares are added, classic ones gain Forever spawns.
+-- join the seed list: new rares are added, classic ones gain Forever spawns,
+-- and Forever's name, level and word on taming (true, false, or nil when it
+-- says nothing) win over the classic ones.
 ns.SeedSource = {}
 do
   local MERGE = 2.5
@@ -19,7 +21,8 @@ do
       -- Forever's name and level win over the classic ones
       if name and name ~= "" then seed[1] = name end
       if level and level > 0 then seed[2] = level end
-      if tame and seed[3] == 0 then seed[3] = 1 end
+      if tame == true and seed[3] == 0 then seed[3] = 1 end
+      if tame == false then seed[3] = 0 end
     end
     local points = seed[5]
     for i = 1, #coords, 2 do

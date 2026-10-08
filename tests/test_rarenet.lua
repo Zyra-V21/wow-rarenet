@@ -384,7 +384,12 @@ test("presence: who is online", function()
   M.step(3)
   eq(#sent("Q2|"), before + 1, "question sent")
   receive("A2|123|0.3.1", "Peer One")
+  -- With many players heard only a sample answers: the earlier tests heard
+  -- plenty, so make sure this client is in the sample.
+  local random = math.random
+  math.random = function(m, n) if not m then return 0 end return random(m, n) end
   receive("Q2|456", "Peer Two")
+  math.random = random
   M.step(8)
   local answers = sent("A2|456|")
   eq(#answers, 1, "we answer others")
@@ -778,6 +783,26 @@ test("how to fight a rare: Forever first, then the classic data", function()
   eq(spellRow and rawget(spellRow, "spell"), 8256, "the fight tab lists the spell")
   d.tabDrops.scripts.OnClick()
   for _, row in ipairs(d.loot) do eq(rawget(row, "spell"), nil, "the drops tab has no spells") end
+end)
+
+test("taming: Forever's word wins, an unknown keeps the classic one", function()
+  local _, _, tame = ns.Database.RareInfo(248299)
+  eq(tame, true, "Elmpaw: Forever's notes say hunters can tame it")
+  _, _, tame = ns.Database.RareInfo(5934)
+  eq(tame, false, "Heartrazor: Forever says not tameable")
+  _, _, tame = ns.Database.RareInfo(5842)
+  eq(tame, true, "Takk the Leaper: classic raptor, and Forever agrees")
+end)
+
+test("opening a rare clears a filter that would hide it, the undiscovered one too", function()
+  local f = ns.Database.Filter()
+  f.undiscovered = true
+  ns.Database.Open(5934)
+  eq(f.undiscovered, false)
+  eq(ns.Database.Selected(), 5934)
+  local found = false
+  for _, n in ipairs(ns.Database.Rebuild()) do if n == 5934 then found = true end end
+  eq(found, true)
 end)
 
 print = function(...) io.write(table.concat({ ... }, " "), "\n") end

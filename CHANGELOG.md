@@ -1,5 +1,9 @@
 # RareNet changelog
 
+## 0.8.1 (beta)
+- Tameable rares follow Forever: Elmpaw, the black bear of Elwynn, now shows as tameable, and whenever Forever says hunters cannot tame a rare, that wins over the classic data.
+- Opening a rare from the map or the live list always shows it in the rare database, even with the "Undiscovered" filter on.
+
 ## 0.8.0 (beta)
 - New "How to fight it" tab in the rare database (`/rarenet db`): what each rare does and how to take it on, for more than 400 rares.
 - Forever first: for Forever rares, a tip on where to find it and how to fight it (group or solo, respawn, kiting...), and its Forever rank (elite or not) in blue.
