@@ -1,0 +1,745 @@
+[
+ {
+  "name": "Bannerwing Survivor",
+  "npc": 256830,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Beast",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=256830",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Boulupulo",
+  "npc": 251494,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Uncategorized",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=251494",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Death Wailer",
+  "npc": 249226,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Undead",
+  "tame": null,
+  "coords": [],
+  "drops": [
+   {
+    "item": 272973,
+    "name": "Drop of Stolen Life"
+   }
+  ],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=249226",
+    "facts": "id, rank, type; location unknown; drops",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Defias Vintner",
+  "npc": 250355,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=250355",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Ganoloth the Tireless",
+  "npc": 249232,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Demon",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=249232",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Gul'gash",
+  "npc": 259758,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Giant",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=259758",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Jezerelle the Swaying",
+  "npc": 255183,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Demon",
+  "tame": null,
+  "coords": [],
+  "drops": [
+   {
+    "item": 274949,
+    "name": "Scrap of Horde Heraldry"
+   }
+  ],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=255183",
+    "facts": "id, rank, type; location unknown; drops",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Kargra the Blind",
+  "npc": 256892,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://www.wowhead.com/forever/npc=256892",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Reginald Holmsby",
+  "npc": 256410,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/256410-reginald-holmsby/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Sarinnia Wormwing",
+  "npc": 249473,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/249473-sarinnia-wormwing/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Scaldaron",
+  "npc": 263141,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Dragonkin",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/263141-scaldaron/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Twilight Forgemaster",
+  "npc": 258032,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/258032-twilight-forgemaster/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Unyielding Eye",
+  "npc": 249233,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Undead",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/249233-unyielding-eye/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Varkharn the Vigilant",
+  "npc": 249231,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Demon",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/249231-varkharn-the-vigilant/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Legion Hulk",
+  "npc": 249238,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Demon",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/249238-legion-hulk/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Mad Marrius",
+  "npc": 257034,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/257034-mad-marrius/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Mosh'gra",
+  "npc": 259801,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/259801-moshgra/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Overseer Myoleth",
+  "npc": 260823,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/260823-overseer-myoleth/",
+    "facts": "id, rank, type; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Old Ironfang",
+  "npc": 261662,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Wolf",
+  "tame": "likely",
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/261662-old-ironfang/",
+    "facts": "id, rank, type wolf; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://www.wowhead.com/forever/npc=261662",
+    "facts": "id; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://forums.wow-petopia.com/viewtopic.php?t=27358&start=40",
+    "facts": "player post names it among the new wolf pets",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": "Wolf; tameable not stated outright"
+ },
+ {
+  "name": "Old Rusthowl",
+  "npc": 263935,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Wolf",
+  "tame": "likely",
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/263935-old-rusthowl/",
+    "facts": "id, rank, type wolf; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://forums.wow-petopia.com/viewtopic.php?t=27358&start=40",
+    "facts": "player post names it among the new wolf pets",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": "Wolf; tameable not stated outright"
+ },
+ {
+  "name": "Old Thornpaw",
+  "npc": 250352,
+  "zone": null,
+  "level": null,
+  "rank": "rare",
+  "type": "Wolf",
+  "tame": "likely",
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/250352-old-thornpaw/",
+    "facts": "id, rank, type wolf; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "",
+  "status": "undiscovered",
+  "note": "Wolf; only the creature family suggests it"
+ },
+ {
+  "name": "Lyn the Ignored",
+  "npc": 247032,
+  "zone": null,
+  "level": null,
+  "rank": "rare elite",
+  "type": "Humanoid",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/247032-lyn-the-ignored/",
+    "facts": "id, rank; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforevertalents.com/dungeons/city-of-dalaran/",
+    "facts": "lists it as a City of Dalaran dungeon boss",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "Probably a City of Dalaran dungeon boss rather than an open-world rare.",
+  "status": "undiscovered",
+  "note": ""
+ },
+ {
+  "name": "Spectral Citizen",
+  "npc": 255277,
+  "zone": null,
+  "level": null,
+  "rank": "elite",
+  "type": "Undead",
+  "tame": null,
+  "coords": [],
+  "drops": [],
+  "sources": [
+   {
+    "url": "https://wowforever.ninja/npcs/255277-spectral-citizen/",
+    "facts": "id, classified elite (not rare)",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://www.wowhead.com/forever/npc=255277",
+    "facts": "id; location unknown",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://foreverchanges.pro/rares",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   },
+   {
+    "url": "https://wowforever.wclbox.com/en/xiyou",
+    "facts": "listed as a rare not placed yet",
+    "checked": "2026-10-05"
+   }
+  ],
+  "conflicts": "Rare lists include it, but its classification is elite, not rare.",
+  "status": "undiscovered",
+  "note": ""
+ }
+]

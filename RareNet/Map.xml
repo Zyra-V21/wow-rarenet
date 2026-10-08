@@ -1,0 +1,19 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- No scripts here: the map canvas wires OnEnter/OnLeave/OnMouseUp itself
+       (it asserts they are unset) and calls OnLoad when it creates the pin.
+       enableMouse must be set on the template, the canvas reads it first. -->
+  <Frame name="RareNetPinTemplate" mixin="RareNetPinMixin" enableMouse="true" virtual="true">
+    <Size x="18" y="18"/>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture parentKey="Disc" setAllPoints="true"/>
+      </Layer>
+      <Layer level="BORDER">
+        <Texture parentKey="Ring" setAllPoints="true"/>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture parentKey="Icon" setAllPoints="true"/>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

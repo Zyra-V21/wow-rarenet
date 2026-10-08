@@ -1,0 +1,10 @@
+RareNet is free software under the GNU General Public License version 3 (see LICENSE).
+
+Third-party data shipped with RareNet:
+
+- Rare spawn points in Seed.lua: QuestieDB, Forever edition (GPL-3.0).
+- Pet families, creature models and the classic loot tables in Seed.lua and Loot.lua: vmangos (GPL-2.0).
+- Forever rare spawns and Forever loot in ForeverRares.lua: ForeverChanges (https://foreverchanges.pro),
+  used with the permission of its authors. This data is not covered by RareNet's GPL licence and may not
+  be reused outside RareNet without ForeverChanges' own permission.
+- World of Warcraft names and game data belong to Blizzard Entertainment.
